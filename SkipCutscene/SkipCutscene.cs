@@ -1,8 +1,4 @@
 using System;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Net;
-using System.Security.Cryptography;
 using Dalamud;
 using Dalamud.Game;
 using Dalamud.Game.Command;
@@ -11,123 +7,74 @@ using Dalamud.IoC;
 using Dalamud.Logging;
 using Dalamud.Plugin;
 
-namespace Plugins.a08381.SkipCutscene
-{
-    public class SkipCutscene : IDalamudPlugin
-    {
+namespace SkipCutscene;
 
-        private readonly Config _config;
-        private readonly RandomNumberGenerator _csp;
+public class SkipCutscene : IDalamudPlugin {
+    private const short SkipValueEnabled = -28528;
+    private const short SkipValueDisabledOffset1 = 13173;
+    private const short SkipValueDisabledOffset2 = 6260;
+    private readonly Config _config;
+    private readonly CutsceneAddressResolver _cutsceneAddressResolver;
 
-        private readonly decimal _base = uint.MaxValue;
+    public string Name => "SkipCutscene";
 
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
-        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
-        public SkipCutscene()
-        {
-            if (Interface.GetPluginConfig() is not Config configuration || configuration.Version == 0)
-                configuration = new Config { IsEnabled = true, Version = 1 };
+    [PluginService] private DalamudPluginInterface Interface { get; set; }
+    [PluginService] private SigScanner SigScanner { get; set; }
+    [PluginService] private CommandManager CommandManager { get; set; }
+    [PluginService] private ChatGui ChatGui { get; set; }
 
-            _config = configuration;
+    public SkipCutscene() {
+        _config = GetConfig();
+        _cutsceneAddressResolver = new CutsceneAddressResolver();
+        _cutsceneAddressResolver.Setup(SigScanner);
 
-            Address = new CutsceneAddressResolver();
-
-            Address.Setup(SigScanner);
-
-            if (Address.Valid)
-            {
-                PluginLog.Information("Cutscene Offset Found.");
-                if (_config.IsEnabled)
-                    SetEnabled(true);
-            }
-            else
-            {
-                PluginLog.Error("Cutscene Offset Not Found.");
-                PluginLog.Warning("Plugin Disabling...");
-                Dispose();
-                return;
-            }
-            _csp = RandomNumberGenerator.Create();
-
-            CommandManager.AddHandler("/sc", new CommandInfo(OnCommand)
-            {
-                HelpMessage = "/sc: Roll your sanity check dice."
-            });
+        if (!_cutsceneAddressResolver.Valid) {
+            PluginLog.Error("Cutscene offset not found.");
+            PluginLog.Warning("Plugin disabling...");
+            Dispose();
+            return;
         }
 
-        public void Dispose()
-        {
-            SetEnabled(false);
-            GC.SuppressFinalize(this);
-        }
+        PluginLog.Information("Cutscene offsets found.");
+        if (_config.IsEnabled) SetCutsceneSkip(true);
 
-        public string Name => "SkipCutscene";
-        
-        [PluginService]
-        public DalamudPluginInterface Interface { get; private set; }
-        
-        [PluginService]
-        public SigScanner SigScanner { get; private set; }
-
-        [PluginService]
-        public CommandManager CommandManager { get; private set; }
-        
-        [PluginService]
-        public ChatGui ChatGui { get; private set; }
-
-        public CutsceneAddressResolver Address { get; }
-
-        public void SetEnabled(bool isEnable)
-        {
-            if (!Address.Valid) return;
-            if (isEnable)
-            {
-                SafeMemory.Write<short>(Address.Offset1, -28528);
-                SafeMemory.Write<short>(Address.Offset2, -28528);
-            }
-            else
-            {
-                SafeMemory.Write<short>(Address.Offset1, 13173);
-                SafeMemory.Write<short>(Address.Offset2, 6260);
-            }
-        }
-
-        private void OnCommand(string command, string arguments)
-        {
-            if (command.ToLower() != "/sc") return;
-            byte[] rndSeries = new byte[4];
-            _csp.GetBytes(rndSeries);
-            int rnd = (int)Math.Abs(BitConverter.ToUInt32(rndSeries, 0) / _base * 50 + 1);
-            ChatGui.Print(_config.IsEnabled
-                ? $"sancheck: 1d100={rnd + 50}, Failed"
-                : $"sancheck: 1d100={rnd}, Passed");
-            _config.IsEnabled = !_config.IsEnabled;
-            SetEnabled(_config.IsEnabled);
-            Interface.SavePluginConfig(_config);
-        }
+        CommandManager.AddHandler("/skipcs", new CommandInfo(OnCutsceneSkipToggleCommand) {
+            HelpMessage = "/skipcs: Toggle MSQ cutscene skip."
+        });
     }
 
-    public class CutsceneAddressResolver : BaseAddressResolver
-    {
-
-        public bool Valid => Offset1 != IntPtr.Zero && Offset2 != IntPtr.Zero;
-
-        public IntPtr Offset1 { get; private set; }
-        public IntPtr Offset2 { get; private set; }
-
-        protected override void Setup64Bit(SigScanner sig)
-        {
-            Offset1 = sig.ScanText("75 33 48 8B 0D ?? ?? ?? ?? BA ?? 00 00 00 48 83 C1 10 E8 ?? ?? ?? ?? 83 78");
-            Offset2 = sig.ScanText("74 18 8B D7 48 8D 0D");
-            PluginLog.Information(
-                "Offset1: [\"ffxiv_dx11.exe\"+{0}]",
-                (Offset1.ToInt64() - Process.GetCurrentProcess().MainModule!.BaseAddress.ToInt64()).ToString("X")
-                );
-            PluginLog.Information(
-                "Offset2: [\"ffxiv_dx11.exe\"+{0}]",
-                (Offset2.ToInt64() - Process.GetCurrentProcess().MainModule!.BaseAddress.ToInt64()).ToString("X")
-                );
+    private Config GetConfig() {
+        if (Interface.GetPluginConfig() is not Config config || config.Version == 0) {
+            config = new Config {
+                IsEnabled = true,
+                Version = 1
+            };
         }
 
+        return config;
+    }
+
+    private void OnCutsceneSkipToggleCommand(string command, string arguments) {
+        bool wasEnabled = _config.IsEnabled;
+
+        string message = wasEnabled
+            ? $"MSQ Cutscenes are now disabled."
+            : $"MSQ Cutscenes are now enabled.";
+
+        ChatGui.Print(message);
+
+        _config.IsEnabled = !wasEnabled;
+        SetCutsceneSkip(_config.IsEnabled);
+        Interface.SavePluginConfig(_config);
+    }
+
+    private void SetCutsceneSkip(bool enabled) {
+        SafeMemory.Write(_cutsceneAddressResolver.Offset1, enabled ? SkipValueEnabled : SkipValueDisabledOffset1);
+        SafeMemory.Write(_cutsceneAddressResolver.Offset2, enabled ? SkipValueEnabled : SkipValueDisabledOffset2);
+    }
+
+    public void Dispose() {
+        SetCutsceneSkip(false);
+        GC.SuppressFinalize(this);
     }
 }

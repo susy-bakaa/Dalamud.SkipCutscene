@@ -1,14 +1,8 @@
-﻿using System.ComponentModel;
-using Dalamud.Configuration;
+﻿using Dalamud.Configuration;
 
-namespace Plugins.a08381.SkipCutscene
-{
-    public class Config : IPluginConfiguration
-    {
+namespace SkipCutscene;
 
-        public int Version { get; set; }
-
-        [DefaultValue(true)]
-        public bool IsEnabled { get; set; }
-    }
+public class Config : IPluginConfiguration {
+    public int Version { get; set; }
+    public bool IsEnabled { get; set; } = true;
 }
