@@ -1,0 +1,20 @@
+[
+  {
+    "Author": "0x526f6d656f",
+    "Name": "SkipCutscene",
+    "InternalName": "SkipCutscene",
+    "AssemblyVersion": "1.3.0.0",
+    "Description": "WARNING: ONLY USE THIS WITH DUTY SUPPORT OR FRIENDS!\n\nBoth commands toggle cutscenes playing:\n- /skipcs\n- /skipcutscene",
+    "ApplicableVersion": "any",
+    "RepoUrl": "https://github.com/0x526f6d656f/Dalamud.SkipCutscene",
+    "DalamudApiLevel": 8,
+    "LoadRequiredState": 0,
+    "LoadSync": false,
+    "CanUnloadAsync": false,
+    "LoadPriority": 0,
+    "Punchline": "Skip cutscenes from Duty Roulette: Main Scenario.",
+    "LastUpdate": 1692385860,
+    "DownloadLinkInstall": "https://github.com/0x526f6d656f/Dalamud.SkipCutscene/releases/download/v1.3.0.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/0x526f6d656f/Dalamud.SkipCutscene/releases/download/v1.3.0.0/latest.zip"
+  }
+]
