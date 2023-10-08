@@ -9,7 +9,7 @@
     "RepoUrl": "https://github.com/no00ob/Dalamud.SkipCutscene",
     "DalamudApiLevel": 9,
     "LoadRequiredState": 0,
-    "IsHide": "False",
+	"IsHide": "False",
     "IsTestingExclusive": "False",
     "LoadSync": false,
     "CanUnloadAsync": false,
@@ -19,6 +19,6 @@
     "LastUpdate": 0,
     "DownloadLinkInstall": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v1.4.0.0/latest.zip",
     "DownloadLinkUpdate": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v1.4.0.0/latest.zip",
-    "IconUrl": "https://raw.githubusercontent.com/no00ob/Dalamud.SkipCutscene/main/Data/skipcs.png"
+	"IconUrl": "https://raw.githubusercontent.com/no00ob/Dalamud.SkipCutscene/main/Data/skipcs.png"
   }
 ]
