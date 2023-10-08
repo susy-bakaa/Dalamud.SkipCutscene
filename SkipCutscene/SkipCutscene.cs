@@ -8,25 +8,29 @@ using Dalamud.Game.Text.SeStringHandling;
 using Dalamud.IoC;
 using Dalamud.Logging;
 using Dalamud.Plugin;
+using Dalamud.Plugin.Services;
 
-namespace SkipCutscene;
+namespace SkipCutscene {
 
 public class SkipCutscene : IDalamudPlugin {
+
     private const short SkipValueEnabled = -28528;
     private const short SkipValueDisabledOffset1 = 13173;
     private const short SkipValueDisabledOffset2 = 6260;
     private bool _isCutsceneSkipEnabled;
-    private readonly string[] _commandAliases = { "/skipcs", "/skipcutscene" };
+    private readonly string[] _commandAliases = { "/skipcs", "/skipcut", "/skipcutscene" };
     private readonly CommandInfo _commandInfo;
     private readonly CutsceneAddressResolver _cutsceneAddressResolver;
 
     public string Name => "SkipCutscene";
 
-    [PluginService] private SigScanner SigScanner { get; set; }
-    [PluginService] private CommandManager CommandManager { get; set; }
-    [PluginService] private ChatGui ChatGui { get; set; }
+    [PluginService] private ISigScanner SigScanner { get; set; }
+    [PluginService] private ICommandManager CommandManager { get; set; }
+    [PluginService] private IChatGui ChatGui { get; set; }
+    [PluginService] public static IPluginLog PluginLog { get; set; }
 
-    public SkipCutscene() {
+    public SkipCutscene() 
+    {
         _isCutsceneSkipEnabled = false;
         _commandInfo = new CommandInfo(OnCutsceneSkipToggleCommand);
         _cutsceneAddressResolver = new CutsceneAddressResolver();
@@ -44,36 +48,55 @@ public class SkipCutscene : IDalamudPlugin {
         AddCommandAliases();
     }
 
-    private void AddCommandAliases() {
-        foreach (string alias in _commandAliases) {
+    private void AddCommandAliases() 
+    {
+        foreach (string alias in _commandAliases) 
+        {
             CommandManager.AddHandler(alias, _commandInfo);
         }
     }
 
-    private void OnCutsceneSkipToggleCommand(string command, string arguments) {
-        _isCutsceneSkipEnabled = !_isCutsceneSkipEnabled;
+    private void OnCutsceneSkipToggleCommand(string command, string arguments) 
+    {
+
+        if (arguments.ToLower().Contains("on") || arguments.ToLower().Contains("yes"))
+        {
+            _isCutsceneSkipEnabled = true;
+        } 
+        else if (arguments.ToLower().Contains("off") || arguments.ToLower().Contains("no"))
+        {
+            _isCutsceneSkipEnabled = false;
+        }
+        else
+        {
+            _isCutsceneSkipEnabled = !_isCutsceneSkipEnabled;
+        }
+
         SetCutsceneSkip(_isCutsceneSkipEnabled);
 
         var chatMessage = new XivChatEntry() {
-            Type = XivChatType.Echo,
+            Type = XivChatType.SystemMessage,
             Message = new SeStringBuilder()
                 .AddUiForeground($"[{Name}] ", 45)
-                .AddText("MSQ Cutscenes are now ")
-                .AddItalics(_isCutsceneSkipEnabled ? "disabled" : "enabled")
-                .AddText(".")
+                .AddText("MSQ Roulette Cutscenes will ")
+                .AddItalics(_isCutsceneSkipEnabled ? "NOT PLAY" : "PLAY")
+                .AddText(" now.")
                 .Build()
         };
 
-        ChatGui.PrintChat(chatMessage);
+        ChatGui.Print(chatMessage);
     }
 
-    private void SetCutsceneSkip(bool enabled) {
+    private void SetCutsceneSkip(bool enabled) 
+    {
         SafeMemory.Write(_cutsceneAddressResolver.Offset1, enabled ? SkipValueEnabled : SkipValueDisabledOffset1);
         SafeMemory.Write(_cutsceneAddressResolver.Offset2, enabled ? SkipValueEnabled : SkipValueDisabledOffset2);
     }
 
-    public void Dispose() {
+    public void Dispose() 
+    {
         SetCutsceneSkip(false);
         GC.SuppressFinalize(this);
     }
+}
 }
