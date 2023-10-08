@@ -3,7 +3,7 @@
     "Author": "Windmourn, 0x526f6d656f, no00ob",
     "Name": "SkipCutscene",
     "InternalName": "SkipCutscene",
-    "AssemblyVersion": "1.4.0.0",
+    "AssemblyVersion": "1.4.0.1",
     "Description": "WARNING: ONLY USE THIS WITH DUTY SUPPORT OR PEOPLE YOU TRUST!\n\nAll 3 commands toggle cutscenes playing:\n- /skipcs\n- /skipcut\n- /skipcutscene",
     "ApplicableVersion": "any",
     "RepoUrl": "https://github.com/no00ob/Dalamud.SkipCutscene",
