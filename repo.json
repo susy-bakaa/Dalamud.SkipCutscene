@@ -3,8 +3,8 @@
     "Author": "Windmourn, 0x526f6d656f, no00ob",
     "Name": "SkipCutscene",
     "InternalName": "SkipCutscene",
-    "AssemblyVersion": "1.4.0.1",
-    "Description": "WARNING: ONLY USE THIS WITH DUTY SUPPORT OR PEOPLE YOU TRUST!\n\nAll 3 commands toggle cutscenes playing:\n- /skipcs\n- /skipcut\n- /skipcutscene",
+    "AssemblyVersion": "1.4.0.2",
+    "Description": "WARNING: ONLY USE THIS PLUGIN WITH DUTY SUPPORT OR PEOPLE YOU TRUST!\n\nAdds command to toggle MSQ Roulette cutscenes. That's all. No more 20+ minute Praetorium runs.",
     "ApplicableVersion": "any",
     "RepoUrl": "https://github.com/no00ob/Dalamud.SkipCutscene",
     "DalamudApiLevel": 9,
@@ -13,10 +13,13 @@
     "CanUnloadAsync": false,
     "LoadPriority": 0,
     "Punchline": "Skip cutscenes from Duty Roulette: Main Scenario.",
-    "DownloadCount": 0,
+    "IsHide": "False",
+    "IsTestingExclusive": "False",
+	  "DownloadCount": 0,
     "LastUpdate": 0,
-    "DownloadLinkInstall": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v1.4.0.1/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v1.4.0.1/latest.zip",
-	"IconUrl": "https://raw.githubusercontent.com/no00ob/Dalamud.SkipCutscene/main/Data/skipcs.png"
+    "DownloadLinkInstall": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v1.4.0.2/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v1.4.0.2/latest.zip",
+	  "IconUrl": "https://raw.githubusercontent.com/no00ob/Dalamud.SkipCutscene/main/Repo/icon.png",
+	  "Changelog": "# Version 1.4.0.2\n- Updated for Dalamud API 9\n- Tweaked command and chat message response\n- Added custom repo download link"
   }
 ]

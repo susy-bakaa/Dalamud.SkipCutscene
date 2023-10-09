@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Dalamud;
 using Dalamud.Game;
 using Dalamud.Game.Command;
@@ -18,7 +18,6 @@ public class SkipCutscene : IDalamudPlugin {
     private const short SkipValueDisabledOffset1 = 13173;
     private const short SkipValueDisabledOffset2 = 6260;
     private bool _isCutsceneSkipEnabled;
-    private readonly string[] _commandAliases = { "/skipcs", "/skipcut", "/skipcutscene" };
     private readonly CommandInfo _commandInfo;
     private readonly CutsceneAddressResolver _cutsceneAddressResolver;
 
@@ -33,6 +32,8 @@ public class SkipCutscene : IDalamudPlugin {
     {
         _isCutsceneSkipEnabled = false;
         _commandInfo = new CommandInfo(OnCutsceneSkipToggleCommand);
+        _commandInfo.HelpMessage = "Toggles the status of cutscenes.\n/skipmsq [on|off] → Toggles the status of cutscenes to specified state.";
+        _commandInfo.ShowInHelp = true;
         _cutsceneAddressResolver = new CutsceneAddressResolver();
         _cutsceneAddressResolver.Setup(SigScanner);
 
@@ -45,15 +46,7 @@ public class SkipCutscene : IDalamudPlugin {
 
         PluginLog.Information("Cutscene offsets found.");
 
-        AddCommandAliases();
-    }
-
-    private void AddCommandAliases() 
-    {
-        foreach (string alias in _commandAliases) 
-        {
-            CommandManager.AddHandler(alias, _commandInfo);
-        }
+        CommandManager.AddHandler("/skipmsq", _commandInfo);
     }
 
     private void OnCutsceneSkipToggleCommand(string command, string arguments) 
