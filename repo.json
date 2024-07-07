@@ -17,8 +17,8 @@
     "IsTestingExclusive": "False",
     "DownloadCount": 0,
     "LastUpdate": 0,
-    "DownloadLinkInstall": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v1.4.1.0/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v1.4.1.0/latest.zip",
+    "DownloadLinkInstall": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v.1.4.1.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/no00ob/Dalamud.SkipCutscene/releases/download/v.1.4.1.0/latest.zip",
     "IconUrl": "https://raw.githubusercontent.com/no00ob/Dalamud.SkipCutscene/main/Repo/icon.png",
     "Changelog": "# Version 1.4.1.0\n- Updated for Dawntrail 7.0!\n- Updated to Dalamud API10"
   }
