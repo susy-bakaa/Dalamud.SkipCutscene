@@ -1,2 +1,2 @@
 # Dalamud.SkipCutscene
-Install: ```https://raw.githubusercontent.com/no00ob/Dalamud.SkipCutscene/main/repo.json```
+Install: ```https://raw.githubusercontent.com/susy-bakaa/Dalamud.SkipCutscene/main/repo.json```
