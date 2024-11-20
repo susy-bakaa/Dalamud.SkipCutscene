@@ -7,7 +7,7 @@
     "Description": "WARNING: ONLY USE THIS PLUGIN WITH DUTY SUPPORT OR PEOPLE YOU TRUST!\n\nAdds command to toggle MSQ Roulette cutscenes. That's all. No more 20+ minute Praetorium runs.",
     "ApplicableVersion": "any",
     "RepoUrl": "https://github.com/susy-bakaa/Dalamud.SkipCutscene",
-    "DalamudApiLevel": 10,
+    "DalamudApiLevel": 11,
     "LoadRequiredState": 0,
     "LoadSync": false,
     "CanUnloadAsync": false,
