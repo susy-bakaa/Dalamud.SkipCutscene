@@ -25,8 +25,8 @@ namespace SkipCutscene
             long offset1FromBase = Offset1 - _baseAddress;
             long offset2FromBase = Offset2 - _baseAddress;
 
-            SkipCutscene.PluginLog.Information($"Offset1: [\"ffxiv_dx11.exe\"+{offset1FromBase:X}]");
-            SkipCutscene.PluginLog.Information($"Offset2: [\"ffxiv_dx11.exe\"+{offset2FromBase:X}]");
+            Service.PluginLog.Information($"Offset1: [\"ffxiv_dx11.exe\"+{offset1FromBase:X}]");
+            Service.PluginLog.Information($"Offset2: [\"ffxiv_dx11.exe\"+{offset2FromBase:X}]");
         }
     }
 }
