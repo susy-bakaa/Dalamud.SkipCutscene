@@ -11,6 +11,7 @@ namespace SkipCutscene
         [PluginService] public static IChatGui ChatGui { get; private set; }
         [PluginService] public static IPluginLog PluginLog { get; private set; }
         [PluginService] public static IClientState ClientState { get; private set; }
+        [PluginService] public static ICondition Condition { get; private set; }
 #pragma warning restore CS8618
     }
 }

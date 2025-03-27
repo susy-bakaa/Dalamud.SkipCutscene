@@ -40,6 +40,7 @@ namespace SkipCutscene
             {
                 plugin.Configuration.Enabled = enabled;
                 plugin.Configuration.Save();
+                plugin.SetCutsceneSkip(enabled);
                 plugin.PrintState();
             }
 

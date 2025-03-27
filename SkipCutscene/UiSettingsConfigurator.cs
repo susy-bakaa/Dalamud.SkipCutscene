@@ -38,7 +38,10 @@ namespace SkipCutscene
         {
             if (plugin.Configuration._SkipBehaviour != SkipBehaviour.Automatic)
                 return;
-            
+
+            if (plugin.IsOccupied)
+                return;
+
             GroupingSize groupingSize = GetCurrentGroupingSize();
 
             if (groupingSize == lastGroupingSize)

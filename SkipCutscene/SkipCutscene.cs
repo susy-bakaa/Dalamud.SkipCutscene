@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using Dalamud;
 using Dalamud.Game;
+using Dalamud.Game.ClientState.Conditions;
 using Dalamud.Game.Command;
 using Dalamud.Game.Text;
 using Dalamud.Game.Text.SeStringHandling;
@@ -13,7 +14,7 @@ using FFXIVClientStructs.FFXIV.Client.Game.Group;
 
 namespace SkipCutscene 
 {
-    public sealed class SkipCutscene : IDalamudPlugin 
+    public sealed class SkipCutscene : IDalamudPlugin
     {
         public string Name => "SkipCutscene";
 
@@ -29,6 +30,16 @@ namespace SkipCutscene
         public WindowSystem WindowSystem { get; init; }
         public SkipCutsceneUI Window { get; init; }
         public UiSettingsConfigurator Configurator { get; init; }
+
+        public bool IsOccupied => Service.Condition[ConditionFlag.BoundByDuty]
+                            || Service.Condition[ConditionFlag.BetweenAreas]
+                            || Service.Condition[ConditionFlag.OccupiedInCutSceneEvent]
+                            || Service.Condition[ConditionFlag.WaitingForDuty]
+                            || Service.Condition[ConditionFlag.LoggingOut]
+                            || Service.Condition[ConditionFlag.InDutyQueue]
+                            || Service.Condition[ConditionFlag.BetweenAreas51]
+                            || Service.Condition[ConditionFlag.BoundByDuty56]
+                            || Service.Condition[ConditionFlag.BoundByDuty95];
 
         private const short SkipValueEnabled = -28528;
         private const short SkipValueDisabledOffset1 = 13173;
@@ -152,8 +163,7 @@ namespace SkipCutscene
 
         public void Dispose() 
         {
-            if (foundAddress)
-                SetCutsceneSkip(false);
+            SetCutsceneSkip(false);
 
             PluginInterface.UiBuilder.Draw -= DrawUI;
             PluginInterface.UiBuilder.OpenConfigUi -= DrawConfigUI;
