@@ -18,7 +18,7 @@ namespace SkipCutscene
     {
         public string Name => "SkipCutscene";
 
-        private const string commandName = "/skipmsq";
+        private const string commandName = "/sc";
 
         public const string Authors = "Windmourn, 0x526f6d656f, susy_baka";
         public static readonly string Version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "Unknown";
@@ -88,7 +88,7 @@ namespace SkipCutscene
 
             CommandManager.AddHandler(commandName, new CommandInfo(OnCommand)
             {
-                HelpMessage = "Toggles the status of cutscenes.\n/skipmsq [on|off] → Toggles the status of cutscenes to specified state.\n/skipmsq config → Opens the configuration window.",
+                HelpMessage = "Toggles the status of cutscenes.\n/sc [on|off] → Toggles the status of cutscenes to specified state.\n/sc config → Opens the configuration window.",
                 ShowInHelp = true
             });
 
