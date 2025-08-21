@@ -7,7 +7,7 @@ namespace SkipCutscene
 {
     public class CutsceneAddressResolver : BaseAddressResolver 
     {
-        private const string Offset1Pattern = "75 33 48 8B 0D ?? ?? ?? ?? BA ?? 00 00 00 48 83 C1 10 E8 ?? ?? ?? ?? 83 78";
+        private const string Offset1Pattern = "75 ?? 48 8B 0D ?? ?? ?? ?? BA ?? 00 00 00 48 83 C1 10 E8 ?? ?? ?? ?? 83 78 ?? ?? 74";
         private const string Offset2Pattern = "74 18 8B D7 48 8D 0D";
         private readonly nint _baseAddress = Process.GetCurrentProcess().MainModule!.BaseAddress;
 

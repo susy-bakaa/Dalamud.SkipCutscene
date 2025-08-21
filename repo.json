@@ -3,18 +3,18 @@
     "Author": "Windmourn, 0x526f6d656f, susy_baka",
     "Name": "SkipCutscene",
     "InternalName": "SkipCutscene",
-    "AssemblyVersion": "1.5.2.0",
+    "AssemblyVersion": "1.5.2.1",
     "Description": "WARNING: ONLY USE THIS PLUGIN WITH DUTY SUPPORT OR PEOPLE YOU TRUST!\n\nAdds command to toggle MSQ Roulette cutscenes. That's all. No more 20+ minute Praetorium runs.",
     "ApplicableVersion": "any",
     "RepoUrl": "https://github.com/susy-bakaa/Dalamud.SkipCutscene",
     "DalamudApiLevel": 13,
-	"Tags": [
-		"cutscene",
-		"skip",
-		"duty",
-		"roulette",
-		"msq"
-	],
+    "Tags": [
+      "cutscene",
+      "skip",
+      "duty",
+      "roulette",
+      "msq"
+    ],
     "LoadRequiredState": 0,
     "LoadSync": false,
     "CanUnloadAsync": false,
@@ -24,9 +24,9 @@
     "IsTestingExclusive": "False",
     "DownloadCount": 0,
     "LastUpdate": 0,
-    "DownloadLinkInstall": "https://github.com/susy-bakaa/Dalamud.SkipCutscene/releases/download/v.1.5.2.0/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/susy-bakaa/Dalamud.SkipCutscene/releases/download/v.1.5.2.0/latest.zip",
+    "DownloadLinkInstall": "https://github.com/susy-bakaa/Dalamud.SkipCutscene/releases/download/v.1.5.2.1/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/susy-bakaa/Dalamud.SkipCutscene/releases/download/v.1.5.2.1/latest.zip",
     "IconUrl": "https://raw.githubusercontent.com/susy-bakaa/Dalamud.SkipCutscene/main/Repo/icon.png",
-    "Changelog": "# Version 1.5.2.0\n- Updated for patch 7.3 and API13\n- Changed the command to shorter 'sc'"
+    "Changelog": "# Version 1.5.2.0\n- Updated for patch 7.3 and API13\n- Changed the command to shorter 'sc'\n# Version 1.5.2.1\n- Updated a cutscene signature to new one that works"
   }
 ]
