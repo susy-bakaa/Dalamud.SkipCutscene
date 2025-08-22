@@ -11,6 +11,7 @@ using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
 using FFXIVClientStructs.FFXIV.Client.Game.Group;
+using InteropGenerator.Runtime;
 
 namespace SkipCutscene 
 {
@@ -42,7 +43,7 @@ namespace SkipCutscene
                             || Service.Condition[ConditionFlag.BoundByDuty95];
 
         private const short SkipValueEnabled = -28528;
-        private const short SkipValueDisabledOffset1 = 13173;
+        private const short SkipValueDisabledOffset1 = 14709;
         private const short SkipValueDisabledOffset2 = 6260;
         private bool foundAddress = false;
         private readonly CutsceneAddressResolver _cutsceneAddressResolver;
