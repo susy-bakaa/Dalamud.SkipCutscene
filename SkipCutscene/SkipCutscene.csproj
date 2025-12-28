@@ -1,6 +1,6 @@
-﻿<Project Sdk="Dalamud.NET.Sdk/13.0.0">
+﻿<Project Sdk="Dalamud.NET.Sdk/14.0.0">
   <PropertyGroup>
-    <TargetFramework>net9.0-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <OutputType>Library</OutputType>
     <PlatformTarget>x64</PlatformTarget>
     <Platforms>x64;AnyCPU</Platforms>
@@ -11,6 +11,6 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Update="DalamudPackager" Version="13.0.0" />
+    <PackageReference Update="DalamudPackager" Version="14.0.1" />
   </ItemGroup>
 </Project>
