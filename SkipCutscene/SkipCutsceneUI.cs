@@ -46,7 +46,7 @@ namespace SkipCutscene
 
             if (ImGui.IsItemHovered())
             {
-                ImGui.SetTooltip("Enable or disable the cutscene skipping feature. This flag can be directly changed with the '/skipmsq' command.");
+                ImGui.SetTooltip("Enable or disable the cutscene skipping feature. This flag can be directly changed with the '/sc' command.");
             }
 
             var skipBehaviour = plugin.Configuration._SkipBehaviour;
