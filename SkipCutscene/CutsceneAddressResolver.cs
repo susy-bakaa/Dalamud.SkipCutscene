@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Dalamud.Game;
 using Dalamud.Logging;
+using Dalamud.Plugin.Services;
 
 namespace SkipCutscene 
 {
