@@ -3,11 +3,11 @@
     "Author": "Windmourn, 0x526f6d656f, susy_baka",
     "Name": "SkipCutscene",
     "InternalName": "SkipCutscene",
-    "AssemblyVersion": "1.5.3.1",
+    "AssemblyVersion": "1.5.4.0",
     "Description": "WARNING: ONLY USE THIS PLUGIN WITH DUTY SUPPORT OR PEOPLE YOU TRUST!\n\nAdds command to toggle MSQ Roulette cutscenes. That's all. No more 20+ minute Praetorium runs.",
     "ApplicableVersion": "any",
     "RepoUrl": "https://github.com/susy-bakaa/Dalamud.SkipCutscene",
-    "DalamudApiLevel": 14,
+    "DalamudApiLevel": 15,
     "Tags": [
       "cutscene",
       "skip",
@@ -24,9 +24,9 @@
     "IsTestingExclusive": "False",
     "DownloadCount": 0,
     "LastUpdate": 0,
-    "DownloadLinkInstall": "https://github.com/susy-bakaa/Dalamud.SkipCutscene/releases/download/v.1.5.3.1/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/susy-bakaa/Dalamud.SkipCutscene/releases/download/v.1.5.3.1/latest.zip",
+    "DownloadLinkInstall": "https://github.com/susy-bakaa/Dalamud.SkipCutscene/releases/download/v.1.5.4.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/susy-bakaa/Dalamud.SkipCutscene/releases/download/v.1.5.4.0/latest.zip",
     "IconUrl": "https://raw.githubusercontent.com/susy-bakaa/Dalamud.SkipCutscene/main/Repo/icon.png",
-    "Changelog": "# Version 1.5.3.1\n- Fixed Dalamud load error\nVersion 1.5.3.0\n- Updated for patch 7.4, .NET 10 and API14"
+    "Changelog": "# Version 1.5.4.0\n- Updated for patch 7.5 and API15"
   }
 ]
